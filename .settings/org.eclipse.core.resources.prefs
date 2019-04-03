@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//WebContent/content.jsp=UTF-8
+encoding//WebContent/findPswd.jsp=UTF-8
+encoding//WebContent/head.jsp=UTF-8
+encoding//WebContent/index.jsp=UTF-8
+encoding//WebContent/login.jsp=UTF-8
+encoding//WebContent/person.jsp=UTF-8
+encoding//WebContent/rigister.jsp=UTF-8
+encoding//WebContent/upload.jsp=UTF-8
+encoding//WebContent/usrUI.jsp=UTF-8
+encoding//src/www/web1/dataDAO/DraftDAO.java=UTF-8
+encoding//src/www/web1/filter/LoginFilter.java=UTF-8
