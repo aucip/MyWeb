@@ -21,12 +21,11 @@
 <title>登陆</title>
 </head>
 <body>
-	<%@include file="head.jsp" %>
 	<div class="login">
-		<form action="LoginServlet" method="post">
+		<form action="login" method="post">
 			
-			<span style="font-size: 150%;margin-left: 80px;">账号:</span>
-			<input id="account" type="text" name="account" placeholder="请输入账号" class="login1"/><br>
+			<span style="font-size: 150%;margin-left: 80px;">邮箱:</span>
+			<input id="account" type="text" name="email" placeholder="请输入邮箱" class="login1"/><br>
 			<span style="font-size: 150%;margin-left: 80px;">密码:</span>
 			<input id="pswd" type="password" name="password" placeholder="请输入密码" class="login2"/><br>
 			

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="www.web1.mapper.EssayDraftMapper">
+	
+		<select id="eGetByPid" parameterType="int" resultType="Essay">
+	        select * from  Essay where pid= #{pid}
+	    </select>
+	    
+	    <select id="getEssays" resultType="Essay">
+	    	select * from Essay
+	    </select>
+	    
+	    <select id="getEssayByType" parameterType="String" resultType="Essay">
+	    	select * from Essay where type=#{type}
+	    </select>
+	    
+	    <select id="getDrafts" resultType="Draft">
+	    	select * from Draft
+	    </select>
+	    
+	    <select id="getEssayByID" parameterType="int" resultType="Essay">
+	    	select * from Essay where ID=#{ID}
+	    </select>
+	    
+	    <select id="getDraftByID" parameterType="int" resultType="Draft">
+	    	select * from Draft where ID=#{ID}
+	    </select>
+	    
+	    <insert id="addDraft" parameterType="www.web1.javaBean.Draft">
+	    	insert ignore into draft values (#{pid}, #{ID}, #{headline}, now(),#{content})
+	    </insert>
+	    
+	    <insert id="addEssay" parameterType="www.web1.javaBean.Essay">
+	    	insert ignore into Essay values (#{pid}, #{ID}, #{headline}, #{type}, #{content}, 0, 0)
+	    </insert>
+	    
+	    <update id="updateDraft" parameterType="www.web1.javaBean.Draft" >
+	    	update draft set headline=#{headline},date=now(),content=#{content} where pid=#{pid}
+	    </update>
+	    
+	    <update id="updateEssay" parameterType="www.web1.javaBean.Essay" >
+	    	update Essay set headline=#{headline},date=now(),content=#{content} where pid=#{pid}
+	    </update>
+	    
+	    <delete id="deleteDraft" parameterType="int">
+	    	delete from draft where pid = #{pid}
+	    </delete>
+	</mapper>
+
