@@ -24,5 +24,21 @@
 	    <update id="updateUser" parameterType="User">
 	    	update users set nickname=#{nickname}, password=#{password},age=#{age}, profession=#{profession},tele=#{tele},email=#{email},habby=#{habby},autograph=#{autograph},pathOFBg=#{PathOfBg},PathOfHead=#{PathOfHead} where ID = #{ID}
 	    </update>
+	    
+	    <select id="getByFanID" parameterType="int" resultType="UserRel">
+	        select * from  userrel where FanID= #{FanID}
+	    </select>
+	    
+	    <select id="getFansByID" parameterType="int" resultType="UserRel">
+	        select * from  userrel where ID= #{ID}
+	    </select>
+	    
+	    <delete id="deleteUserRel" parameterType="UserRel">
+	    	delete from userrel where ID=#{ID} and fanID=#{fanID}
+	    </delete>
+	    
+	    <insert id="addUserRel" parameterType="UserRel">
+	    	insert into userrel(ID, fanID) values(#{ID}, #{fanID})
+	    </insert>
 	</mapper>
 

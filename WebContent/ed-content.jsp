@@ -37,7 +37,7 @@
 		
 		<div class="left2">
 			<c:forEach items="${comment}" var="c" varStatus="st">
-				<a href="#">${c.getID() }</a>:<span class="a">${c.getContent() }</span><br />
+				<a href="ed-userUI?ID=${c.getID() }">${c.getID() }</a>:<span class="a">${c.getContent() }</span><br />
 			</c:forEach>
 		</div>
 		
@@ -53,25 +53,15 @@
 		<div class="right1">
 			<h4 style="color: white;font-size: 150%;text-align: center;">刘力铭最近发表的文章</h4>
 		</div>
-		
 		<div class="right2">
-			<ul >
-				<a href="#">西藏的水</a>
-				<span class="">散文</span>
-				<span class="">最近去到西藏...</span>
-			</ul>
-			<ul >
-				<a href="#">西藏的水</a>
-				<span class="">散文</span>
-				<span class="">最近去到西藏...</span>
-			</ul>
-			<ul >
-				<a href="#">西藏的水</a>
-				<span class="">散文</span>
-				<span class="">最近去到西藏...</span>
-			</ul>
+			<c:forEach var="essay" items="essays" varStatus="v">
+				<ul >
+					<a href="#">西藏的水</a>
+					<span class="">散文</span>
+					<span class="">最近去到西藏...</span>
+				</ul>				
+			</c:forEach>
 		</div>
-		
 	</div>
 </body>
 </html>

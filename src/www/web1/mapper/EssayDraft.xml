@@ -22,7 +22,7 @@
 	    </select>
 	    
 	    <select id="getEssayByID" parameterType="int" resultType="Essay">
-	    	select * from Essay where ID=#{ID}
+	    	select * from Essay where ID=#{ID} order by date desc
 	    </select>
 	    
 	    <select id="getDraftByID" parameterType="int" resultType="Draft">

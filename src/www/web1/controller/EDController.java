@@ -23,6 +23,7 @@ import www.web1.javaBean.Comment;
 import www.web1.javaBean.Draft;
 import www.web1.javaBean.Essay;
 import www.web1.javaBean.User;
+import www.web1.javaBean.UserRel;
 import www.web1.mapper.EssayDraftMapper;
 import www.web1.mapper.OtherMapper;
 import www.web1.mapper.UserMapper;
@@ -95,11 +96,45 @@ public class EDController {
 	}
 	
 	@RequestMapping("ed-userUI")
-	public ModelAndView displayUserUI(){
+	public ModelAndView displayUserUI(@SessionAttribute("user") User user,
+			@RequestParam("ID") int ID){
 		ModelAndView mav = new ModelAndView();
-		
+		User person = um.getByID(ID);
+		List<UserRel> res = um.getByFanID(user.getID());
+		UserRel re = null;
+		for(int i = 0; i < res.size(); i++){
+			if(res.get(i).getID() == ID){
+				re =res.get(i);
+				break;
+			}
+		}
+		List<Essay> essays = edm.getEssayByID(ID);
+		mav.addObject("re", re);
+		mav.addObject("person", person);
+		mav.addObject("essays", essays);
+		mav.setViewName("ed-userUI");
 		return mav;
 	}	
+	
+	@RequestMapping("concern")
+	public ModelAndView concern(@SessionAttribute("user") User user,
+			@RequestParam("ID") int ID){
+		ModelAndView mav = new ModelAndView();
+		UserRel r = new UserRel(ID, user.getID());
+		um.addUserRel(r);
+		mav.setViewName("redirect:/ed-userUI?ID="+String.valueOf(ID));
+		return mav;
+	}
+	
+	@RequestMapping("unconcern")
+	public ModelAndView unconcern(@SessionAttribute("user") User user,
+			@RequestParam("ID") int ID){
+		ModelAndView mav = new ModelAndView();
+		UserRel r = new UserRel(ID, user.getID());
+		um.deleteUserRel(r);
+		mav.setViewName("redirect:/ed-userUI?ID="+String.valueOf(ID));
+		return mav;
+	}
 	
 	@RequestMapping("ed-upload")
 	public ModelAndView displayUpload(@SessionAttribute(value="user") User user,@RequestParam(value="pid",defaultValue="0") int pid){

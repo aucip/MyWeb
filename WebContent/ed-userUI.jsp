@@ -38,9 +38,11 @@
     	<%@include file="ed-head.jsp" %>
     	<div class="pic1">
     		<a href="#"><img id="pic2" src="pic/title1.jpg" width="80px" height="80px"/></a>
-    		<span class="name">刘力铭</span>
+    		<span class="name">${person.getNickname() }</span>
     		<div id="faction1">
-    			<a href="#">关注</a><a href="#">私信</a>
+    			<c:if test="${re == null }"><a href="concern?ID=${person.getID() }">关注</a></c:if>
+    			<c:if test="${re != null }"><a href="unconcern?ID=${person.getID() }">取消关注</a></c:if>
+    			<a href="talk?ID=${person.getID() }">私信</a>
     			<span>粉丝：5</span><span>关注：6</span>
     		</div>
     	</div>
@@ -49,49 +51,13 @@
     		<div class="left1">
 				<h3>最近动态</h3>
     		</div>
-    		
-    		<div class="left2">
-    		<h3>一篇小说的题目</h3>
-				<p>这篇小说开头的一点点...<a href="#">详情</a></p>
-				
-				<div style="background-color:white;border-radius:5px;width: 800px;height:35px;">
-					<img src="pic/转发.png" style="float: right;"/>
-					<img src="pic/评论.png" style="float: right;"/>
-					<img src="pic/点赞.png" style="float: right;"/>
+    		<c:forEach items="${essays}" var="c" varStatus="st">
+				<div class="left2">
+					<h3>${c.getHeadline()}</h3>
+				 	<!-- <a href="#">${c.getID()}</a> -->
+					<p>${c.getContent().substring(0, 3)}...<a href="ed-content?pid=${c.getPid()}">详情</a></p>
 				</div>
-    		</div>
-    		<div class="left2">
-    		<h3>一篇小说的题目</h3>
-				<p>这篇小说开头的一点点...<a href="#">详情</a></p>
-				
-				<div style="background-color:white;border-radius:5px;width: 800px;height:35px;">
-					<img src="pic/转发.png" style="float: right;"/>
-					<img src="pic/评论.png" style="float: right;"/>
-					<img src="pic/点赞.png" style="float: right;"/>
-				</div>
-    		</div>
-    		<div class="left2">
-    		<h3>一篇小说的题目</h3>
-				<p>这篇小说开头的一点点...<a href="#">详情</a></p>
-				
-				<div style="background-color:white;border-radius:5px;width: 800px;height:35px;">
-					<img src="pic/转发.png" style="float: right;"/>
-					<img src="pic/评论.png" style="float: right;"/>
-					<img src="pic/点赞.png" style="float: right;"/>
-				</div>
-    		</div>
-    		<div class="left2">
-    		<h3>一篇小说的题目</h3>
-				<p>这篇小说开头的一点点...<a href="#">详情</a></p>
-				
-				<div style="background-color:white;border-radius:5px;width: 800px;height:35px;">
-					<img src="pic/转发.png" style="float: right;"/>
-					<img src="pic/评论.png" style="float: right;"/>
-					<img src="pic/点赞.png" style="float: right;"/>
-				</div>
-    		</div>
-    		
-    		
+			</c:forEach>
     	</div>
     	
     	<div class="right">
@@ -100,13 +66,13 @@
     		</div>
     		
     		<div class="right2">
-    			<span class="person">19岁</span> 
-    			<span class="person">摩羯座</span>
-    			<span class="person">属虎</span><br />
-    			<span class="person">  四川    广安   岳池县 </span><br />
+    			<span class="person">${person.getAge() }岁</span> 
+    			<span class="person">职业:${person.getProfession() }</span>
+    			<span class="person">爱好:${person.getHabby() }</span><br />
+    			<span class="person">email：${person.getEmail() } </span><br />
     			
     			<h3 style="color:	#006400;margin-left: 20px;">座右铭:</h3>
-    				<h3 style="color:#008B00;margin-left: 50px;">世事漫随流水，算来一梦浮生</h3>
+    				<h3 style="color:#008B00;margin-left: 50px;">${person.getAutograph() }</h3>
     		
     		</div>
     	</div>
