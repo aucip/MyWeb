@@ -22,21 +22,20 @@
 <title>用户注册</title>
 </head>
 <body>
-	<%@include file="head.jsp"%>
+	<%@include file="ed-head.jsp"%>
 	<div class="rigister">
 		<form action="addUser" method="post">
-			<span>用户名:</span><input class="f" type="text" name="rigAccount" placeholder="请输入英文字母+数字"/><br>
 			<span>昵称:</span><input class="f" type="text" name="nickname" placeholder=""/><br>
-			<span>密码:</span><input class="f" type="password" name="rigPswd1" placeholder="数字、英文、符号"/><br>
-			<span>重复密码:</span><input class="f" type="password" name="rigPswd2" placeholder="数字、英文、符号"/><br>
+			<span>密码:</span><input class="f" type="password" name="password" placeholder="数字、英文、符号"/><br>
+			<span>重复密码:</span><input class="f" type="password" name="password2" placeholder="数字、英文、符号"/><br>
 			<span>年龄:</span><input class="f" type="text" name="age" placeholder=""/><br>
 			<span>职业:</span><input class="f" type="text" name="profession" placeholder=""/><br>
 			<span>电话:</span><input class="f" type="text" name="tele" placeholder=""/><br>
-			<span>邮箱:</span><input class="f" type="text" name="rigEmail" placeholder="example@163.com"/><br>
+			<span>邮箱:</span><input class="f" type="text" name="email" placeholder="example@163.com"/><br>
 			<span>爱好:</span><input class="f" type="text" name="habby" placeholder=""/><br>
 			<span>个性签名:</span><input class="f" type="text" name="autograph" placeholder=""/><br>
 			<input class="btn1" type="submit" value="确  定" name="login"/>
-			<input class="btn2" type="button" value="取  消" name="register"/>
+			<input class="btn2" type="button" value="取  消" name="register" onclick="window.location.href='register'"/>
 		</form>
 	</div>
 </body>

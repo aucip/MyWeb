@@ -2,29 +2,29 @@ package www.web1.javaBean;
 import java.io.File;
 
 public class User {
-	private String ID;//id
+	private int ID;//id
 	private String nickname;//昵称
 	private String password;//密码
 	private int age;//年龄
-	private String prfession;//职业
+	private String profession;//职业
 	private String tele;//电话
 	private String email;//邮箱
 	private String habby;//爱好
 	private String autograph;//签名
-	private File PathOfBg;//背景图片路径
-	private File PathOfHead;//头像图片路径
+	private String PathOfBg;//背景图片路径
+	private String PathOfHead;//头像图片路径
 	public User(){
 		
 	}
-	public User(String ID, String nickname, String password, 
-		int age, String prfession, String tele, String email
-		,String habby, String autograph, File PathOfBg, File PathOfHead
+	public User(int ID, String nickname, String password, 
+		int age, String profession, String tele, String email
+		,String habby, String autograph, String PathOfBg, String PathOfHead
 	){
 		this.ID = ID;
 		this.nickname = nickname;
 		this.password = password;
 		this.age = age;
-		this.prfession = prfession;
+		this.profession = profession;
 		this.tele = tele;
 		this.email = email;
 		this.habby = habby;
@@ -32,10 +32,10 @@ public class User {
 		this.PathOfBg = PathOfBg;
 		this.PathOfHead = PathOfHead;
 	}
-	public String getID() {
+	public int getID() {
 		return ID;
 	}
-	public void setID(String iD) {
+	public void setID(int iD) {
 		ID = iD;
 	}
 	public String getNickname() {
@@ -56,11 +56,11 @@ public class User {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public String getPrfession() {
-		return prfession;
+	public String getProfession() {
+		return profession;
 	}
-	public void setPrfession(String prfession) {
-		this.prfession = prfession;
+	public void setProfession(String profession) {
+		this.profession = profession;
 	}
 	public String getTele() {
 		return tele;
@@ -86,16 +86,16 @@ public class User {
 	public void setAutograph(String autograph) {
 		this.autograph = autograph;
 	}
-	public File getPathOfBg() {
+	public String getPathOfBg() {
 		return PathOfBg;
 	}
-	public void setPathOfBg(File pathOfBg) {
+	public void setPathOfBg(String pathOfBg) {
 		PathOfBg = pathOfBg;
 	}
-	public File getPathOfHead() {
+	public String getPathOfHead() {
 		return PathOfHead;
 	}
-	public void setPathOfHead(File pathOfHead) {
+	public void setPathOfHead(String pathOfHead) {
 		PathOfHead = pathOfHead;
 	}
 
