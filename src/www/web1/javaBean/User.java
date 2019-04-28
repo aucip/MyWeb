@@ -98,6 +98,11 @@ public class User {
 	public void setPathOfHead(String pathOfHead) {
 		PathOfHead = pathOfHead;
 	}
-
+	@Override
+	public String toString() {
+		return "User [ID=" + ID + ", nickname=" + nickname + ", password=" + password + ", age=" + age + "]";
+	}
+	
+	
 	
 }

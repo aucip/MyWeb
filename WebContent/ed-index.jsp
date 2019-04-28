@@ -67,48 +67,38 @@
 		<span>共${total }页</span>
 	</div>
 	<div class="right">
-		<c:if test="${user != null }" var="state" scope="session">
+		<c:if test="${user != null and user.getID() != 0 }" var="state" scope="session">
 			<div class="dynamic">
 				<h3>关注动态</h3>
-				<span>你关注的<a href="#">莎士比亚</a>发布了小说短文<a href="#">哈姆雷特短篇版</a></span><br />
-				<span>时间:2016-07-01 21:15</span><br />
-				<span>你关注的<a href="#">莎士比亚</a>发布了小说短文<a href="#">哈姆雷特短篇版</a></span><br />
-				<span>时间:2016-07-01 21:12</span><br />
-				<span>你关注的<a href="#">莎士比亚</a>发布了小说短文<a href="#">哈姆雷特短篇版</a></span><br />
-				<span>时间:2016-07-01 21:12</span><br />
-				<span>你关注的<a href="#">莎士比亚</a>发布了小说短文<a href="#">哈姆雷特短篇版</a></span><br />
-				<span>时间:2016-07-01 21:12</span><br />
-				<span>你关注的<a href="#">莎士比亚</a>发布了小说短文<a href="#">哈姆雷特短篇版</a></span><br />
-				<span>时间:2016-07-01 21:12</span><br />
+				<c:if test="${essaysFan != null }">
+					<c:forEach items="${essaysFan }" var="e" varStatus="v">
+						<span>你关注的<a href="#">${e.getID() }</a>发布了小说短文<a href="#">${e.getHeadline() }</a></span><br />
+						<span>时间:${e.getDate().toLocaleString() }</span><br />
+					</c:forEach>
+				</c:if>
 			</div>
 		</c:if>
 		<span>热门排行</span>
 		<ol class="rankings">
-			<li><a href="#">哈姆雷特</a></li>
-			<li><a href="#">装在套子里的人</a></li>
-			<li><a href="#">我的大学</a></li>
-			<li><a href="#">最后的生还者</a></li>
-			<li><a href="#">陈年旧事</a></li>
-			<li><a href="#">项链</a></li>
+			<c:forEach items="${essaysTop6 }" var="e" varStatus="v">
+				<li><a href="ed-content?pid=${e.getPid() }">${e.getHeadline() }</a></li>
+			</c:forEach>
 		</ol>
 		<span>点赞最多</span>
 		<ol class="rankings">
-			<li><a href="#">哈姆雷特</a></li>
-			<li><a href="#">装在套子里的人</a></li>
-			<li><a href="#">我的大学</a></li>
-			<li><a href="#">最后的生还者</a></li>
-			<li><a href="#">陈年旧事</a></li>
-			<li><a href="#">项链</a></li>
+			<c:forEach items="${essaysTop62 }" var="e" varStatus="v">
+				<li><a href="ed-content?pid=${e.getPid() }">${e.getHeadline() }</a></li>
+			</c:forEach>
 		</ol>
 		<span>评论最多</span>
-		<ol class="rankings">
+		<!-- <ol class="rankings">
 			<li><a href="#">哈姆雷特</a></li>
 			<li><a href="#">装在套子里的人</a></li>
 			<li><a href="#">我的大学</a></li>
 			<li><a href="#">最后的生还者</a></li>
 			<li><a href="#">陈年旧事</a></li>
 			<li><a href="#">项链</a></li>
-		</ol>
+		</ol> -->
 	</div>
 </body>
 </html>

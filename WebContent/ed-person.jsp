@@ -13,7 +13,7 @@
 			li a {display: block; color: white; text-align: center; padding: 14px 16px; text-decoration: none;}
 			li a:hover:not(.active) {background-color: #111;}
 			.active {background-color: #4CAF50;}
-        	.pic1{background: url(pic/head1.jpg);width: inherit; height: 300px;}
+        	.pic1{background: url(${user.getPathOfBg() });width: inherit; height: 300px;}
         	.pic1 form{width: 100px; height: 100px;margin-top: 50px}
         	#pic2{position: absolute;left: 650px;top: 120px;border: solid darkblue;border-radius: 50%}
         	.name{position: absolute;left: 650px;top: 210px;font-size: 150%;color: white;}
@@ -36,7 +36,7 @@
     <body>
 	<%@include file="ed-head.jsp"%>
     	<div class="pic1">
-    		<form id="subPic" action="subHeadPic" method="post" enctype="multipart/form-data">
+    		<form id="subPic" action="#" method="post" enctype="multipart/form-data">
     			<img id="pic2" src="${user.getPathOfHead() }" width="80px" height="80px"/>
     			<input type="file" name="file"/>
     			<script type="text/javascript">
@@ -49,8 +49,8 @@
 			         	document.getElementById("subPic").submit();  
 					}
 				</script>
-    			<input type="submit" value="上传头像" onclick="subHeadPic">
-    			<input type="submit" value="上传背景" onclick="subBgPic">
+    			<input type="submit" value="上传头像" onclick="subHeadPic()">
+    			<input type="submit" value="上传背景" onclick="subBgPic()">
     		</form>
     		<span class="name">${user.getNickname() }</span>
     		<div id="faction1">

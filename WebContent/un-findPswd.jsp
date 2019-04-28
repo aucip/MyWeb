@@ -23,7 +23,7 @@
 	<div class="find">
 		<form action="">
 			<div class="find1">
-				<span style="font-size: 150%;margin-left: 40px;">申述账号:</span>
+				<span style="font-size: 150%;margin-left: 40px;">申述邮箱:</span>
 				<input type="text" name="account" style="width: 200px;height: 30px;"/><br />		
 			</div>
 			

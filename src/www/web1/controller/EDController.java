@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,15 +67,32 @@ public class EDController {
 	}
 	
 	@RequestMapping("ed-index") 
-	public ModelAndView getQuestions(Page page){
+	public ModelAndView getQuestions(@SessionAttribute("user") User user,
+			Page page){
 		ModelAndView mav = new ModelAndView();
 		PageHelper.offsetPage(page.getStart(), 5);
-		List<Essay> essays = null;
 		String[] typeName = {"小说","随笔","散文","作文","日记","知识"};
+		List<Essay> essays = null;
 		essays = edm.getEssayByType(typeName[page.getType()]);
 		int total = (int) new PageInfo<>(essays).getTotal();
 		page.caculateLast(total);
+		
+		List<Essay> essaysTop6 = edm.getEssaysTop6();
+		List<Essay> essaysTop62 = edm.getEssaysTop62();
+		essaysTop6 = essaysTop6.subList(0, 6);
+		essaysTop62 = essaysTop62.subList(0, 6);
+		
+		if(user != null){
+			System.out.println(user.toString());
+			List<Essay> essaysFan = edm.getByFanID(user.getID());
+			mav.addObject("essaysFan", essaysFan);
+		}else{
+			mav.addObject("essaysFan", null);
+		}
+
 		mav.addObject("essays", essays);
+		mav.addObject("essaysTop62", essaysTop62);
+		mav.addObject("essaysTop6", essaysTop6);
 		mav.addObject("total", total/5);
 		mav.setViewName("ed-index");
 		return mav;
@@ -184,7 +202,7 @@ public class EDController {
 		if(!file.isEmpty()){
 			String path = request.getServletContext().getRealPath("/headImage");
 			String name = file.getOriginalFilename();
-			String filename = String.valueOf(user.getID())+"."+name.substring(name.length()-3, name.length());
+			String filename = String.valueOf(user.getID())+"bg."+name.substring(name.length()-3, name.length());
 			File filepath = new File(path, filename);
 			if(!filepath.getParentFile().exists()){
 				filepath.getParentFile().mkdirs();
@@ -220,5 +238,11 @@ public class EDController {
 		Draft draft = new Draft(pid, ID, theme, comCon);
 		edm.updateDraft(draft);
 		return "ed-upload";
+	}
+	
+	@PostMapping("loginout")
+	public String loginout(HttpSession session){
+		session.invalidate();
+		return "redirect:/login";
 	}
 }
