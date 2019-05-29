@@ -23,6 +23,9 @@ import com.github.pagehelper.PageInfo;
 import www.web1.javaBean.Comment;
 import www.web1.javaBean.Draft;
 import www.web1.javaBean.Essay;
+import www.web1.javaBean.News;
+import www.web1.javaBean.NewsCon;
+import www.web1.javaBean.NewsCon2;
 import www.web1.javaBean.User;
 import www.web1.javaBean.UserRel;
 import www.web1.mapper.EssayDraftMapper;
@@ -171,6 +174,43 @@ public class EDController {
 		return mav;
 	}
 	
+	@RequestMapping("ed-news")
+	public ModelAndView displayNews(@SessionAttribute(value="user") User user){
+		ModelAndView mav = new ModelAndView();
+		List<User> people = om.getNewsList(user.getID());
+		mav.addObject("people", people);
+		mav.setViewName("ed-news");
+		return mav;
+	}
+	
+	@RequestMapping("ed-newsFrame")
+	public ModelAndView displayNewsFrame(@SessionAttribute(value="user") User user,@RequestParam(value="id",defaultValue="0") int id){
+		ModelAndView mav = new ModelAndView();
+		List<NewsCon> meNewsCons = om.getUsersNews(user.getID(), id);
+		List<NewsCon> newsCons = om.getUsersNews(id, user.getID());
+		NewsCon2 newsConAll = null;
+		try {
+			newsConAll = new NewsCon2(meNewsCons, newsCons);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mav.addObject("news", newsConAll);
+		mav.addObject("userb", id);
+		mav.setViewName("ed-newsFrame");
+		return mav;
+	}
+	
+	@PostMapping("subNews")
+	public ModelAndView subNews(@RequestParam("usera") int usera,
+			@RequestParam("userb") int userb, 
+			@RequestParam("text") String text){
+		ModelAndView mav = new ModelAndView();
+		om.addNews(usera, userb, text);
+		mav.setViewName("login");
+		return mav;
+	}
+	
 	@PostMapping("/subHeadPic")
 	public String subHeadPic(@SessionAttribute(value="user") User user,
 			HttpServletRequest request,
@@ -240,9 +280,11 @@ public class EDController {
 		return "ed-upload";
 	}
 	
-	@PostMapping("loginout")
+	@RequestMapping("loginout")
 	public String loginout(HttpSession session){
 		session.invalidate();
 		return "redirect:/login";
 	}
+	
+	
 }

@@ -13,6 +13,10 @@ public class User {
 	private String autograph;//签名
 	private String PathOfBg;//背景图片路径
 	private String PathOfHead;//头像图片路径
+	
+	private boolean activated;  
+    // 随机码(激活帐户与生成重设密码链接时使用)  
+    private String randomCode;  
 	public User(){
 		
 	}
@@ -103,6 +107,17 @@ public class User {
 		return "User [ID=" + ID + ", nickname=" + nickname + ", password=" + password + ", age=" + age + "]";
 	}
 	
-	
+	public boolean isActivated() {  
+        return activated;  
+    }  
+    public void setActivated(boolean activated) {  
+        this.activated = activated;  
+    }  
+    public String getRandomCode() {  
+        return randomCode;  
+    }  
+    public void setRandomCode(String randomCode) {  
+        this.randomCode = randomCode;  
+    }  
 	
 }

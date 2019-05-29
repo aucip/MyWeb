@@ -6,16 +6,16 @@
 		<meta charset="utf-8" />
 		<title></title>
 		<style>
-			ul{list-style: none;background: silver;width: 600px;margin: 0px;padding: 0px;}
-			li{background: slategray;margin: 1px;width: inherit;height: 30px;line-height: 30px;text-align: center;}
+			#u{list-style: none;background: silver;width: 600px;margin: 0px;padding: 0px;}
+			#u li{background: slategray;margin: 1px;width: inherit;height: 30px;line-height: 30px;text-align: center;}
 		</style>
 	</head>
 	<body>
-		<ul>
-			<li><a href="#">管理员</a>的消息<a href="#">点击进入对话框</a></li>
-			<li><a href="#">铁甲小宝</a>的消息<a href="#">点击进入对话框</a></li>
-			<li><a href="#">管理员</a>的消息<a href="#">点击进入对话框</a></li>
-			<li><a href="#">管理员</a>的消息<a href="#">点击进入对话框</a></li>
+		<%@include file="ed-head.jsp"%>
+		<ul id="u">
+			<c:forEach items="${people}" var="c" varStatus="st">
+				<li><a href="ed-userUI?ID=${c.getID() }">${c.getNickname() }</a>的消息<a href="ed-newsFrame?id=${c.getID() }">点击进入对话框</a></li>
+			</c:forEach>
 		</ul>
 	</body>
 </html>

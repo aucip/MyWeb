@@ -18,101 +18,72 @@
 <!--讨论区滚动条end-->
 </head>
 <body>
-
+<%@include file="ed-head.jsp"%>
 <br>
 <div class="talk">
 	<div class="talk_title"><span>手机讨论发言</span></div>
 	<div class="talk_record">
 		<div id="jp-container" class="jp-container">
-			<div class="talk_recordboxme">
-				<div class="user"><img src="images/thumbs/15.jpg"/>美美</div>
-				<div class="talk_recordtextbg">&nbsp;</div>
-				<div class="talk_recordtext">
-					<h3>我的问题是</h3>
-					<span class="talk_time">2014-09-15 15:06</span>
-				</div>
-			</div>
+			<c:forEach var="c" begin="0" end="${news.getSize() }" varStatus="st">
+				<c:choose>
+         			<c:when test="${news.getType() == 0}">
+           				<!-- continue -->
+           				<div class="talk_recordboxme">
+							<div class="user"><img src="images/thumbs/15.jpg"/>美美</div>
+							<div class="talk_recordtextbg">&nbsp;</div>
+							<div class="talk_recordtext">
+								<h3>${news.getTopContent() }</h3>
+								<span class="talk_time">${news.getTopDateString()}</span>
+								${news.pop()}
+								<continue>
+							</div>
+						</div>
+         			</c:when>
+         			<c:otherwise>
+            			<div class="talk_recordbox">
+							<div class="user"><img src="images/thumbs/11.jpg"/>壮壮</div>
+							<div class="talk_recordtextbg">&nbsp;</div>
+							<div class="talk_recordtext">
+								<h3>${news.getTopContent() }</h3>
+								<span class="talk_time">${news.getTopDateString()}</span>
+								${news.pop()}
+							</div>
+						</div>    
+         			</c:otherwise>
+      			</c:choose>
+				
+				
+				<c:if test="${news.getType() == 0}">
+					
+				</c:if>
 			
-			<div class="talk_recordbox">
-				<div class="user"><img src="images/thumbs/11.jpg"/>壮壮</div>
-				<div class="talk_recordtextbg">&nbsp;</div>
-				<div class="talk_recordtext">
-					<h3>对方的回答是：1+1=2</h3>
-					<span class="talk_time">2014-09-15 15:06</span>
-				</div>
-			</div>
-			
-			<div class="talk_recordboxme">
-				<div class="user"><img src="images/thumbs/15.jpg"/>美美</div>
-				<div class="talk_recordtextbg">&nbsp;</div>
-				<div class="talk_recordtext">
-					<h3>我的问题是：1+1真的等于2吗？不会是等于3吧</h3>
-					<span class="talk_time">2014-09-15 15:06</span>
-				</div>
-			</div>
-			
-			<div class="talk_recordbox">
-				<div class="user"><img src="images/thumbs/11.jpg"/>壮壮</div>
-				<div class="talk_recordtextbg">&nbsp;</div>
-				<div class="talk_recordtext">
-					<h3>对方的回答是：在错误的情况下是可以等于3的</h3>
-					<span class="talk_time">2014-09-15 15:06</span>
-				</div>
-			</div>
-			
-			<div class="talk_recordboxme">
-				<div class="user"><img src="images/thumbs/15.jpg"/>美美</div>
-				<div class="talk_recordtextbg">&nbsp;</div>
-				<div class="talk_recordtext">
-					<h3>我的问题是1+1可以等于1吗？</h3>
-					<span class="talk_time">2014-09-15 15:06</span>
-				</div>
-			</div>
-			
-			<div class="talk_recordbox">
-				<div class="user"><img src="images/thumbs/11.jpg"/>壮壮</div>
-				<div class="talk_recordtextbg">&nbsp;</div>
-				<div class="talk_recordtext">
-					<h3>对方的回答：理论上是不可以的，现在中是可以的。</h3>
-					<span class="talk_time">2014-09-15 15:06</span>
-				</div>
-			</div>
-			
-			<div class="talk_recordboxme">
-				<div class="user"><img src="images/thumbs/15.jpg"/>美美</div>
-				<div class="talk_recordtextbg">&nbsp;</div>
-				<div class="talk_recordtext">
-					<h3>我的问题是：那这样说1+1到底等于几呢？</h3>
-					<span class="talk_time">2014-09-15 15:06</span>
-				</div>
-			</div>
-			
-			<div class="talk_recordbox">
-				<div class="user"><img src="images/thumbs/11.jpg"/>壮壮</div>
-				<div class="talk_recordtextbg">&nbsp;</div>
-				<div class="talk_recordtext">
-					<h3>对方的回答是：可以等于任何数，你想等于几就等于几，你烦不烦啊！</h3>
-					<span class="talk_time">2014-09-15 15:06</span>
-				</div>
-			</div>
-			
-			<div class="talk_recordboxme">
-				<div class="user"><img src="images/thumbs/15.jpg"/>美美</div>
-				<div class="talk_recordtextbg">&nbsp;</div>
-				<div class="talk_recordtext">
-					<h3>我在思考！</h3>
-					<span class="talk_time">2014-09-15 15:06</span>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	
 	</div>
 	
 	<div class="talk_word">
 		&nbsp;
+		<script type="text/javascript">
+			function submitNews(){
+				var aForm = document.createElement("form");
+				aForm.action = "subNews";
+				aForm.method = "post";
+				document.body.appendChild(aForm);
+				var i = document.getElementById("news");
+				var j = document.getElementById("usera");
+				var k = document.getElementById("userb");
+				aForm.appendChild(i);
+				aForm.appendChild(j);
+				aForm.appendChild(k);
+				aForm.submit();
+			}
+		</script>
 		<input class="add_face" id="facial" type="button" title="添加表情" value="" />
-		<input class="messages emotion" autocomplete="off" value="在这里输入文字" onFocus="if(this.value=='在这里输入文字'){this.value='';}"  onblur="if(this.value==''){this.value='在这里输入文字';}"  />
-		<input class="talk_send" type="button" title="发送" value="发送" />
+		<input id="usera" name="usera" type="hidden" value="${user.getID() }">
+		<input id="userb" name="userb" type="hidden" value="${userb }">
+		<input class="messages emotion" id="news" autocomplete="off" name="text" value="在这里输入文字" onFocus="if(this.value=='在这里输入文字'){this.value='';}"  onblur="if(this.value==''){this.value='在这里输入文字';}"  />
+		<input class="talk_send" type="button" title="发送" value="发送" onclick="submitNews()"/>
 	</div>
 </div>
 

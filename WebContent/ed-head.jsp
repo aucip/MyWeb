@@ -8,7 +8,7 @@
 		  	<c:if test="${user!=null and user.getID() != 0}" var="jugle" scope="session">
 		  		<li  ><a href="ed-person" >个人主页</a></li>
 		  		<li  ><a href="#" >我的文章</a></li>
-		  		<li  ><a href="#" >消息</a></li>
+		  		<li  ><a href="ed-news" >消息</a></li>
 		  		<li  ><a href="ed-upload" >草稿</a></li>
 		  	</c:if>
 		  	<li>

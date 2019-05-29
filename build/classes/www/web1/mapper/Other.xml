@@ -10,5 +10,15 @@
 		<insert id="insertComment" parameterType="Comment">
 			insert into comment(essayPid,ID,content) values(#{essayPid}, #{ID}, #{content})
 		</insert>
+		<select id="getUsersNews" parameterType="int" resultType="NewsCon">
+			select * from news_con where id in (select news_id from news where usera_id=#{usera_id} and userb_id=#{userb_id}) order by time desc
+		</select>
+		<select id="getNewsList" parameterType="int" resultType="User">
+			select * from users where id in (select usera_id from news where userb_id = #{id})
+		</select>
+		<insert id="addNews">
+			insert into news_con(content,time) values(#{content}, now());
+			insert into news(usera_id, userb_id, news_id) values(#{usera_id}, #{userb_id}, LAST_INSERT_ID());
+		</insert>
 	</mapper>
 
