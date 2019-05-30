@@ -283,7 +283,7 @@ public class EDController {
 	@RequestMapping("loginout")
 	public String loginout(HttpSession session){
 		session.invalidate();
-		return "redirect:/login";
+		return "redirect:/login.jsp";
 	}
 	
 	

@@ -18,11 +18,11 @@
 	    </select>
 	    
 	    <insert id="addUser" parameterType="User">
-	    	insert into users(nickname, password, age, profession, tele, email, happy, autograph) values(#{nickname},#{password},#{age},#{profession},#{tele},#{happy},#{autograph})
+	    	insert into users(nickname, password, age, profession, tele, email, habby, autograph, actived, randomCode) values(#{nickname},#{password},#{age},#{profession},#{tele}, #{email},#{habby},#{autograph}, #{actived}, #{randomCode})
 	    </insert>
 	    
 	    <update id="updateUser" parameterType="User">
-	    	update users set nickname=#{nickname}, password=#{password},age=#{age}, profession=#{profession},tele=#{tele},email=#{email},habby=#{habby},autograph=#{autograph},pathOFBg=#{PathOfBg},PathOfHead=#{PathOfHead} where ID = #{ID}
+	    	update users set nickname=#{nickname}, password=#{password},age=#{age}, profession=#{profession},tele=#{tele},email=#{email},habby=#{habby},autograph=#{autograph},pathOFBg=#{PathOfBg},PathOfHead=#{PathOfHead}, actived=#{actived}, randomCode=#{randomCode} where ID = #{ID}
 	    </update>
 	    
 	    <select id="getByFanID" parameterType="int" resultType="UserRel">

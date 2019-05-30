@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import www.web1.javaBean.User;
 import www.web1.mapper.UserMapper;
 import www.web1.service.UserService;
+import www.web1.utils.EmailUtils;
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
@@ -15,10 +16,17 @@ public class UserServiceImpl implements UserService {
 	public int register(User user) {//检查邮箱和昵称是否已经占用0,1表示已经占用，2表示未占用
 		// TODO Auto-generated method stub
 		User u = um.getByEmail(user.getEmail());
-		if(u == null) return 0;
+		if(u != null) return 0;
 		u = um.getByNickname(user.getNickname());
-		if(u == null) return 1;
+		if(u != null) return 1;
+		
+		user.setActived(false);
+		user.randomUUID();
+		
 		um.addUser(user);
+		user = um.getByNickname(user.getNickname());
+		
+		EmailUtils.sendAccountActivateEmail(user);
 		return 2;
 	}
 
@@ -26,7 +34,8 @@ public class UserServiceImpl implements UserService {
 	public User checklogin(String email, String password) {
 		// TODO Auto-generated method stub
 		User user = um.getByEmail(email);
-		if(user == null || !user.getPassword().equals(password)){
+		
+		if(user == null || !user.getPassword().equals(password) || !user.isActived()){
 			return null;
 		}else{
 			return user;

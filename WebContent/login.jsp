@@ -22,7 +22,7 @@
 </head>
 <body>
 	<div class="login">
-		<form action="login" method="post">
+		<form action="loginServlet" method="post">
 			
 			<span style="font-size: 150%;margin-left: 80px;">邮箱:</span>
 			<input id="account" type="text" name="email" placeholder="请输入邮箱" class="login1"/><br>
